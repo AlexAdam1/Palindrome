@@ -1,0 +1,38 @@
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Palindrome {
+    public static void main(String[] args) {
+        boolean loop = false;
+        do {
+            System.out.println("Please enter a word to check if it is a palindrome: ");
+            Scanner sc = new Scanner(System.in);
+            String s = sc.nextLine();
+            int count = 1;
+            Deque <String>letters = new LinkedList<>();
+            for (int i = 0; i < s.length(); i++) {
+                letters.add(s.charAt(i) + "");
+            }
+                while (letters.size() > 1) {
+                    System.out.println(letters.getFirst() + " " + letters.getLast());
+                    if (letters.getFirst().equals(letters.getLast())) {
+                        System.out.println("Yes, the first and last letter in occurence " + count + " are both " + letters.removeLast());
+                        letters.removeFirst();
+                    } else if (!letters.getFirst().equals(letters.getLast())) {
+                        System.out.println("No, the first and last letter in occurence " + count + " do not both equal " + letters.removeFirst() + " or " + letters.removeLast() + ", so the word " + s + " is not a palindrome");
+                    }
+                    count++;
+                }
+
+            System.out.println("Would you like to test another word? Press Y for yes and N for no");
+                s = sc.nextLine();
+            if (s.equalsIgnoreCase("Y")) {
+                loop = true;
+            }
+            else if (s.equalsIgnoreCase("N")) {
+                loop = false;
+            }
+        }while (loop == true);
+    }
+}
